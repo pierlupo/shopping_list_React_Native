@@ -8,8 +8,9 @@ export default function ShoppingList() {
 
     const [modalVisible1,setModal1Visible] = useState(false);
     const [modalVisible2,setModal2Visible] = useState(false);
+    const [article, setArticles] = useState([articles]);
 
-    const Tab =[
+    const articles =[
         { shoppingItem : "Amandes", id : 1 },
         { shoppingItem : "Yaourts", id : 2},
         { shoppingItem:  "Poulet", id : 3},
@@ -41,10 +42,20 @@ export default function ShoppingList() {
         console.log("close modal")
         setModal2Visible(false)
     }
+
+    function AddNewArticle(article){
+      console.log("ajout d'un articcle à ma liste"+article);
+      setArticles(articlesList=> [
+        ...articlesList, { shoppingItem : article, id : Math.random().toString()}
+      ])
+      setModal1Visible(false)
+    }
+
+   
   return (
     <View style={styles.container}>
       <Text style={styles.title} >ShoppingList</Text>
-      <FlatList data={Tab} renderItem={(itemData) => {
+      <FlatList data={articles} renderItem={(itemData) => {
         return (
             <>
             <View>
@@ -57,10 +68,16 @@ export default function ShoppingList() {
         return item.id;
       }}/>
 
-    <TextInput />
+    <TextInput style={styles.textInput} />
+    <View style={styles.btnContainer}>
+    <View style={styles.btn}>
             <Button title="Ajouter" onPress={OpenModal}></Button>
+    </View>
+    <View style={styles.btn}>
             <Button title="Retirer" onPress={OpenModal2}></Button>
-            <AddArticle visible={modalVisible1} closeModal={closeModal} />
+    </View>
+    </View>
+            <AddArticle visible={modalVisible1} closeModal={closeModal} AddNewArticle={AddNewArticle} />
             <CancelArticle visible={modalVisible2} closeModal2={closeModal2} />
     </View>
     
@@ -83,10 +100,24 @@ const styles = StyleSheet.create({
         textAlign: "center",
         padding: 50
       },
-      monTexte2: {
+    monTexte2: {
         color:"white",
         fontSize: 20,
         textAlign: "center",
         padding: 10
       },
+    btnContainer:{
+      margin:5,
+      padding: 5,
+      },
+    textInput:{
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: 4,
+        margin: 10,
+    },
+    btn: {
+        marginTop:5,
+      }
+    
 })
