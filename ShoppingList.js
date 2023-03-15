@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   Image,
+  Pressable,
 } from 'react-native';
 import React, {useState} from 'react';
 import CancelArticle from './CancelArticle';
@@ -29,7 +30,6 @@ export default function ShoppingList() {
     {shoppingItem: 'Serpillière', id: 11},
   ]);
 
-  
   function OpenModal() {
     console.log('clic');
     setModal1Visible(true);
@@ -51,12 +51,23 @@ export default function ShoppingList() {
   }
 
   function AddNewArticle(article) {
-    console.log("ajout d'un articcle à ma liste" + article);
+    console.log("ajout d'un article à ma liste" + article);
     setArticles(articlesList => [
       ...articlesList,
       {shoppingItem: article, id: Math.random().toString()},
     ]);
     setModal1Visible(false);
+  }
+
+  function DeleteArticle(id) {
+    setArticles(articlesList => {
+      return articlesList.filter(a => a.id != id);
+    });
+    
+  }
+
+  function PressArticle() {
+    console.log("j'ai appuyé sur l'article");
   }
 
   return (
@@ -66,13 +77,13 @@ export default function ShoppingList() {
         data={articles}
         renderItem={itemData => {
           return (
-            <>
+            <Pressable  onPress={()=>{DeleteArticle(itemData.item.id)}}>
               <View>
                 <Text style={styles.monTexte2}>
                   {itemData.item.shoppingItem}
                 </Text>
               </View>
-            </>
+            </Pressable>
           );
         }}
         keyExtractor={(item, index) => {
@@ -106,7 +117,11 @@ export default function ShoppingList() {
         closeModal={closeModal}
         AddNewArticle={AddNewArticle}
       />
-      <CancelArticle visible={modalVisible2} closeModal2={closeModal2} />
+      <CancelArticle
+        visible={modalVisible2}
+        closeModal2={closeModal2}
+        DeleteArticle={DeleteArticle}
+      />
     </View>
   );
 }
