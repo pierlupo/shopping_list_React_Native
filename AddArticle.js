@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Modal, TextInput, Button, Image } from 'react-native'
+import { StyleSheet, Text, View, Modal, TextInput, Button, Image, Pressable } from 'react-native'
 import React, { useState } from 'react'
 
 export default function AddArticle(props) {
@@ -25,7 +25,9 @@ export default function AddArticle(props) {
     <Modal visible={props.visible}>
         <View style={styles.container}>
             <Text style={styles.title}>Ajouter des articles</Text>
+            <Pressable onPress={props.closeModal}>
             <Image source={require('./assets/38234.png')} style={styles.img}></Image>
+            </Pressable>
             <TextInput style={styles.textInput} placeholder="Ajouter un article..." onChangeText={RecupInput} value={textInput}/>
         <View style={styles.btnContainer}>
         <View style={styles.btn}>

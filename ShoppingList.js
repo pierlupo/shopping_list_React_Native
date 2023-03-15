@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, TextInput, View, ScrollView, FlatList} from 'react-native';
+import {Button, StyleSheet, Text, TextInput, View, ScrollView, FlatList, Image} from 'react-native';
 import React, { useState }from 'react'
 import CancelArticle from './CancelArticle';
 import AddArticle from './AddArticle';
@@ -67,7 +67,12 @@ export default function ShoppingList() {
       }} keyExtractor={(item,index) => {
         return item.id;
       }}/>
-
+    <View style={styles.imgstyle}>
+    <Image source={require('./assets/38234.png')} style={styles.img}></Image>
+    <Image source={require('./assets/38234.png')} style={styles.img}></Image>
+    <Image source={require('./assets/38234.png')} style={styles.img}></Image>
+    <Image source={require('./assets/38234.png')} style={styles.img}></Image>
+    </View>
     <TextInput style={styles.textInput} />
     <View style={styles.btnContainer}>
     <View style={styles.btn}>
@@ -118,6 +123,18 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginTop:5,
-      }
+      },
+    img:{
+        width:100,
+        height: 100,
+        
+        
+    },
+    imgstyle:{
+      display:"flex",
+      flexDirection:"row",
+      justifyContent:"center",
+      alignItems: 'center',
+    }
     
 })
