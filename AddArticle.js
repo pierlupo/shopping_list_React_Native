@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 export default function AddArticle(props) {
 
     const [textInput,setTextInput] = useState('')
+    //const [article, setArticles] = useState([articles]);
 
     function RecupInput(enteredText) {
         console.log(enteredText)
@@ -12,13 +13,13 @@ export default function AddArticle(props) {
 
     // const newArticle = setTextInput(enteredText)
 
-    function AddNewArticle(article){
-        console.log("ajout d'un articcle à ma liste"+article);
-        setArticles(articlesList=> [
-          ...articlesList, { shoppingItem : article, id : Math.random().toString()}
-        ])
-        setModal1Visible(false)
-      }
+    // function AddNewArticle(article){
+    //     console.log("ajout d'un article à ma liste"+article);
+    //     setArticles(articlesList=> [
+    //       ...articlesList, { shoppingItem : article, id : Math.random().toString()}
+    //     ])
+    //     setModal1Visible(false)
+    //   }
 
 
   return (
@@ -31,8 +32,7 @@ export default function AddArticle(props) {
             <TextInput style={styles.textInput} placeholder="Ajouter un article..." onChangeText={RecupInput} value={textInput}/>
         <View style={styles.btnContainer}>
         <View style={styles.btn}>
-            <Button title="Ajouter"  onPress={(article)=>{AddNewArticle}}></Button>
-            {/* onPress={props.closeModal} */}
+            <Button title="Ajouter"  onPress={()=>{props.AddNewArticle(textInput)}}></Button>
         </View>   
             <View style={styles.btn}>
             <Button title='Retourner à la liste' onPress={props.closeModal}></Button>
