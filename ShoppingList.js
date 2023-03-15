@@ -8,14 +8,19 @@ import {
   FlatList,
   Image,
   Pressable,
+  TouchableOpacity,
 } from 'react-native';
+
 import React, {useState} from 'react';
 import CancelArticle from './CancelArticle';
 import AddArticle from './AddArticle';
+import LinearGradient from "react-native-linear-gradient";
 
 export default function ShoppingList() {
+
   const [modalVisible1, setModal1Visible] = useState(false);
   const [modalVisible2, setModal2Visible] = useState(false);
+
   const [articles, setArticles] = useState([
     {shoppingItem: 'Amandes', id: 1},
     {shoppingItem: 'Yaourts', id: 2},
@@ -66,9 +71,9 @@ export default function ShoppingList() {
     
   }
 
-  function PressArticle() {
-    console.log("j'ai appuyé sur l'article");
-  }
+  // function PressArticle() {
+  //   console.log("j'ai appuyé sur l'article");
+  // }
 
   return (
     <View style={styles.container}>
@@ -109,7 +114,7 @@ export default function ShoppingList() {
           <Button title="Ajouter" onPress={OpenModal}></Button>
         </View>
         <View style={styles.btn}>
-          <Button title="Retirer" onPress={OpenModal2}></Button>
+          {/* <Button title="Retirer" onPress={OpenModal2}></Button> */}
         </View>
       </View>
       <AddArticle
@@ -143,6 +148,7 @@ const styles = StyleSheet.create({
   },
   monTexte2: {
     color: 'white',
+    textTransform: 'uppercase',
     fontSize: 20,
     textAlign: 'center',
     padding: 10,
@@ -164,4 +170,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
 });

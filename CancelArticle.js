@@ -20,9 +20,9 @@ export default function CancelArticle(props) {
         </Pressable>
         <TextInput style={styles.textInput} placeholder="Retirer un article..." onChangeText={RecupInput} value={textInput}/>
         <View style={styles.btnContainer}>
-    <View style={styles.btn}>
+    {/* <View style={styles.btn}>
         <Button title="Retirer" onPress={()=>{props.DeleteArticle(textInput)}}></Button>
-    </View>
+    </View> */}
     <View style={styles.btn}>
         <Button title='Retourner à la liste' onPress={props.closeModal2}></Button>
     </View>
