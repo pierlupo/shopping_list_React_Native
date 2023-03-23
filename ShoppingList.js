@@ -11,29 +11,26 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CancelArticle from './CancelArticle';
 import AddArticle from './AddArticle';
 import LinearGradient from "react-native-linear-gradient";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function ShoppingList() {
 
   const [modalVisible1, setModal1Visible] = useState(false);
   const [modalVisible2, setModal2Visible] = useState(false);
 
-  const [articles, setArticles] = useState([
-    {shoppingItem: 'Amandes', id: 1},
-    {shoppingItem: 'Yaourts', id: 2},
-    {shoppingItem: 'Poulet', id: 3},
-    {shoppingItem: 'Pommes de terre', id: 4},
-    {shoppingItem: 'Crème fraîche', id: 5},
-    {shoppingItem: 'Abricots', id: 6},
-    {shoppingItem: 'Ail', id: 7},
-    {shoppingItem: 'Oignons', id: 8},
-    {shoppingItem: 'Sel', id: 9},
-    {shoppingItem: 'Papier toilette', id: 10},
-    {shoppingItem: 'Serpillière', id: 11},
-  ]);
+  const [articles, setArticles] = useState([]);
+
+  useEffect (()=>{
+    if(articles.length == 0){
+    getData()
+} else  {
+    setData()
+}
+
+  },[articles])
 
   function OpenModal() {
     console.log('clic');
@@ -70,6 +67,50 @@ export default function ShoppingList() {
     });
     
   }
+  const setData = async () => {
+    try {
+      const mesArticles = JSON.stringify(articles)
+        // [{shoppingItem: 'Amandes', id: "1"},
+        // {shoppingItem: 'Yaourts', id: "2"},
+        // {shoppingItem: 'Poulet', id: "3"},
+        // {shoppingItem: 'Pommes de terre', id: "4"},
+        // {shoppingItem: 'Crème fraîche', id: "5"},
+        // {shoppingItem: 'Abricots', id: "6"},
+        // {shoppingItem: 'Ail', id: "7"},
+        // {shoppingItem: 'Oignons', id: "8"},
+        // {shoppingItem: 'Sel', id: "9"},
+        // {shoppingItem: 'Papier toilette', id: "10"},
+        // {shoppingItem: 'Serpillière', id: "11"},]
+      
+      await AsyncStorage.setItem('articles', mesArticles);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const mesArticles =  await AsyncStorage.getItem('articles');
+      if(mesArticles !== null){
+        setArticles(JSON.parse(mesArticles));
+}
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const removeData = async () => {
+  //   try {
+      
+  //     await AsyncStorage.removeItem('articles');
+  //     setArticles({
+  //       shoppingItem: '',
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // function PressArticle() {
   //   console.log("j'ai appuyé sur l'article");
@@ -116,6 +157,12 @@ export default function ShoppingList() {
         <View style={styles.btn}>
           {/* <Button title="Retirer" onPress={OpenModal2}></Button> */}
         </View>
+        <View>
+      <Text>{articles.shoppingItem}</Text>
+      <Button title="Set Data" onPress={setData} />
+      <Button title="Get Data" onPress={getData} />
+      {/* <Button title="Delete Data" onPress={removeData} /> */}
+    </View>
       </View>
       <AddArticle
         visible={modalVisible1}

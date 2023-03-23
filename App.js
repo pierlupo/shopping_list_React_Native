@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   Modal,
   SafeAreaView,
@@ -27,22 +19,16 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import ShoppingList from './ShoppingList';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
 
 
-function App(): JSX.Element {
-  // const isDarkMode = useColorScheme() === 'dark';
 
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  //};
+function App() {
+
 
   return (
     
-    <ShoppingList></ShoppingList>
+    <ShoppingList />
 
   );
 }
